@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+		<ApplicationIcon>icon.ico</ApplicationIcon>
+		<Company>kordiseps</Company>
+		<PackageProjectUrl>https://github.com/kordiseps/zipped-text-reader</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/kordiseps/zipped-text-reader</RepositoryUrl>
+		<PackageTags>csv, text, reader, zipped</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<Authors>kordiseps</Authors>
+		<Description>Simple, low-memory-consuming zipped text file reader. ZippedText.Reader reads zipped text file partially. Thus, no need to extract whole file to read.</Description>
+		<Copyright>2021 kordiseps apps</Copyright>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Content Include="icon.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>
