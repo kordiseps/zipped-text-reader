@@ -1,37 +1,102 @@
-## Welcome to GitHub Pages
+# Zipped Text Reader
+Simple, low memory consuming zipped text file reader for .Net.  
+This library aims to consume less RAM by reading a certain part of the zipped file without extracting the entire file.  
+Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/tr-tr/dotnet/api/system.data.sqlclient.sqldatareader?view=dotnet-plat-ext-6.0) package.  
+By saying `reader.Read()`, a certain number of lines are read from the zipped text file each time.  
+Thus, no need to extract whole file to read.
 
-You can use the [editor on GitHub](https://github.com/kordiseps/zipped-text-reader/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+## Installation  
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+- Package Manager : `Install-Package ZippedText.Reader -Version 1.0.0`
+- .NET CLI : `dotnet add package ZippedText.Reader --version 1.0.0`
+- PackageReference : `<PackageReference Include="ZippedText.Reader" Version="1.0.0" />`
+- Paket CLI : `paket add ZippedText.Reader --version 1.0.0`
+- Script & Interactive : `#r "nuget: ZippedText.Reader, 1.0.0"`
+- Cake : 
+```
+// Install ZippedText.Reader as a Cake Addin
+#addin nuget:?package=ZippedText.Reader&version=1.0.0
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+// Install ZippedText.Reader as a Cake Tool
+#tool nuget:?package=ZippedText.Reader&version=1.0.0
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-### Jekyll Themes
+## Dependencies  
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kordiseps/zipped-text-reader/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    .NETCoreApp 3.1
+        No dependencies.
+    .NETStandard 2.0
+        No dependencies.
+    net5.0
+        No dependencies.
+    net6.0
+        No dependencies.
 
-### Support or Contact
+## Usage
+Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/tr-tr/dotnet/api/system.data.sqlclient.sqldatareader?view=dotnet-plat-ext-6.0) package.  
+Need to add `using ZippedText.Reader;` statement to beginning of the .cs file.  
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```csharp
+byte[] zippedTextFileBytes = File.ReadAllBytes("zipped-text-file-path");
+ZippedTextReader reader = new ZippedTextReader(zippedTextFileBytes);
+while (reader.Read())
+{
+    List<string> lines = (List<string>)reader;
+    // or simply : 
+    //List<string> lines = reader;
+
+    // Do stuff with lines
+}
+```
+`ZippedTextReader` has implicity to `List<string>`. That means, after `Read()` method the read lines can be accesible by this way:
+```csharp
+    List<string> lines = (List<string>)reader;
+    // or simply : 
+    //List<string> lines = reader;
+```
+The `Read()` method reads 10.000 lines by default. This default value choosen because of ram-consuming and speed balance for me.  
+For other cases line count to read can be changeable by specifying count as parameter for `Read()` method.
+```csharp
+int count = 100_000;
+//or 
+//int count = 10;
+while (reader.Read(count))
+{
+...
+```
+`ZippedTextReader` assumes there is one file in the zip file. If zip file has more than one file, file name needs to be specified in constructor.
+```csharp
+byte[] zippedTextFileBytes = File.ReadAllBytes("zipped-text-file-path");
+ZippedTextReader reader = new ZippedTextReader(zippedTextFileBytes,"certain-text-file-name");
+
+```
+
+
+## Authors
+
+ - [Said Yeter](https://github.com/kordiseps)
+
+## Licence
+
+MIT License
+
+Copyright (c) 2021 Said Yeter
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
