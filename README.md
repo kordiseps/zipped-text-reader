@@ -1,7 +1,7 @@
 # Zipped Text Reader
 Simple, low memory consuming zipped text file reader for .Net.  
 This library aims to consume less RAM by reading a certain part of the zipped file without extracting the entire file.  
-Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/tr-tr/dotnet/api/system.data.sqlclient.sqldatareader?view=dotnet-plat-ext-6.0) package.  
+Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader) package.  
 By saying `reader.Read()`, a certain number of lines are read from the zipped text file each time.  
 Thus, no need to extract whole file to read.
 
@@ -9,18 +9,7 @@ Thus, no need to extract whole file to read.
 
 - Package Manager : `Install-Package ZippedText.Reader -Version 1.0.0`
 - .NET CLI : `dotnet add package ZippedText.Reader --version 1.0.0`
-- PackageReference : `<PackageReference Include="ZippedText.Reader" Version="1.0.0" />`
-- Paket CLI : `paket add ZippedText.Reader --version 1.0.0`
-- Script & Interactive : `#r "nuget: ZippedText.Reader, 1.0.0"`
-- Cake : 
-```
-// Install ZippedText.Reader as a Cake Addin
-#addin nuget:?package=ZippedText.Reader&version=1.0.0
-
-// Install ZippedText.Reader as a Cake Tool
-#tool nuget:?package=ZippedText.Reader&version=1.0.0
-```
-
+- PackageReference : `<PackageReference Include="ZippedText.Reader" Version="1.0.0" />`  
 
 ## Dependencies  
 
@@ -48,15 +37,19 @@ while (reader.Read())
 
     // Do stuff with lines
 }
-```
-`ZippedTextReader` has implicity to `List<string>`. That means, after `Read()` method the read lines can be accesible by this way:
+```  
+
+`ZippedTextReader` has implicity to `List<string>`. That means, after `Read` method the read lines can be accesible by this way:  
+
 ```csharp
-    List<string> lines = (List<string>)reader;
-    // or simply : 
-    //List<string> lines = reader;
-```
-The `Read()` method reads 10.000 lines by default. This default value choosen because of ram-consuming and speed balance for me.  
-For other cases line count to read can be changeable by specifying count as parameter for `Read()` method.
+List<string> lines = (List<string>)reader;
+// or simply : 
+//List<string> lines = reader;
+```  
+
+The `Read` method reads 10.000 lines by default. This default value choosen because of ram-consuming and speed balance.  
+For other cases line count to read can be changeable by specifying count as parameter for `Read` method.  
+
 ```csharp
 int count = 100_000;
 //or 
@@ -64,18 +57,15 @@ int count = 100_000;
 while (reader.Read(count))
 {
 ...
-```
-`ZippedTextReader` assumes there is one file in the zip file. If zip file has more than one file, file name needs to be specified in constructor.
+```  
+
+`ZippedTextReader` assumes there is one file in the zip file. If zip file has more than one file, file name needs to be specified in constructor.  
+
 ```csharp
 byte[] zippedTextFileBytes = File.ReadAllBytes("zipped-text-file-path");
 ZippedTextReader reader = new ZippedTextReader(zippedTextFileBytes,"certain-text-file-name");
 
-```
-
-
-## Authors
-
- - [Said Yeter](https://github.com/kordiseps)
+```  
 
 ## Licence
 
