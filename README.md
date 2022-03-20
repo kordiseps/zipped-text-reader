@@ -1,71 +1,28 @@
-# Zipped Text Reader
-Simple, low memory consuming zipped text file reader for .Net.  
-This library aims to consume less RAM by reading a certain part of the zipped file without extracting the entire file.  
-Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader) package.  
-By saying `reader.Read()`, a certain number of lines are read from the zipped text file each time.  
-Thus, no need to extract whole file to read.
+# Zipped Text Reader and Writer
 
-## Installation  
+This repository contains zipped file reader and writer libraries for .Net for better memory usage purposes.
 
-- Package Manager : `Install-Package ZippedText.Reader -Version 1.0.0`
-- .NET CLI : `dotnet add package ZippedText.Reader --version 1.0.0`
-- PackageReference : `<PackageReference Include="ZippedText.Reader" Version="1.0.0" />`  
+## Requirements
 
-## Dependencies  
-
-    .NETCoreApp 3.1
-        No dependencies.
-    .NETStandard 2.0
-        No dependencies.
-    net5.0
-        No dependencies.
-    net6.0
-        No dependencies.
+- [.Net SDK](https://dotnet.microsoft.com/en-us/download/dotnet)
 
 ## Usage
-Usage for this package is inspired by the [SqlDataReader](https://docs.microsoft.com/tr-tr/dotnet/api/system.data.sqlclient.sqldatareader?view=dotnet-plat-ext-6.0) package.  
-Need to add `using ZippedText.Reader;` statement to beginning of the .cs file.  
 
-```csharp
-byte[] zippedTextFileBytes = File.ReadAllBytes("zipped-text-file-path");
-ZippedTextReader reader = new ZippedTextReader(zippedTextFileBytes);
-while (reader.Read())
-{
-    List<string> lines = (List<string>)reader;
-    // or simply : 
-    //List<string> lines = reader;
+### Repository Usage
 
-    // Do stuff with lines
-}
-```  
+- Clone this repository to local
+- To build .sln file, use `dotnet build {.sln directory}` command
+> Eg: `dotnet build src`
+- To build .csproj file, use `dotnet build {.csproj directory}` command
+> Eg: `dotnet build src/ZippedText.Reader`
+- To create nuget package (nupkg), use `dotnet pack {.csproj directory} -p:PackageVersion={version}` command
+> Eg: `dotnet pack src/ZippedText.Reader -p:PackageVersion=1.1.2`
+<!-- - To run tests, use `dotnet test ./messaging-service/MessagingService.Api.Test/MessagingService.Api.Test.csproj` -->
 
-`ZippedTextReader` has implicity to `List<string>`. That means, after `Read` method the read lines can be accesible by this way:  
+### Library Usage
 
-```csharp
-List<string> lines = (List<string>)reader;
-// or simply : 
-//List<string> lines = reader;
-```  
-
-The `Read` method reads 10.000 lines by default. This default value choosen because of ram-consuming and speed balance.  
-For other cases line count to read can be changeable by specifying count as parameter for `Read` method.  
-
-```csharp
-int count = 100_000;
-//or 
-//int count = 10;
-while (reader.Read(count))
-{
-...
-```  
-
-`ZippedTextReader` assumes there is one file in the zip file. If zip file has more than one file, file name needs to be specified in constructor.  
-
-```csharp
-byte[] zippedTextFileBytes = File.ReadAllBytes("zipped-text-file-path");
-ZippedTextReader reader = new ZippedTextReader(zippedTextFileBytes,"certain-text-file-name");
-
-```  
+- [Zipped Text Reader](/src/ZippedText.Reader)
+- [Zipped Text Writer](/src/ZippedText.Writer)
 
 ## Licence
 

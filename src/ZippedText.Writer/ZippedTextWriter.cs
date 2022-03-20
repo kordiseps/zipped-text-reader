@@ -77,7 +77,7 @@ namespace ZippedText.Writer
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new InvalidOperationException("ZippedTextWriter write error: " + ex.Message, ex);
             }
         }
         public bool Write(string line)
