@@ -21,8 +21,8 @@ This repository contains zipped file reader and writer libraries for .Net for be
 
 ### Library Usage
 
-- [Zipped Text Reader](/src/ZippedText.Reader)
-- [Zipped Text Writer](/src/ZippedText.Writer)
+- [Zipped Text Reader](/src/ZippedText.Reader/README.md)
+- [Zipped Text Writer](/src/ZippedText.Writer/README.md)
 
 ## Licence
 

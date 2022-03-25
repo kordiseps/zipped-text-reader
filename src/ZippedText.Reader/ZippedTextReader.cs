@@ -7,10 +7,29 @@ namespace ZippedText.Reader
 {
     public class ZippedTextReader
     {
+
+        //https://stackoverflow.com/a/11996441
+        private bool IsCompressedData(byte[] data)
+        {
+            int ZIP_LEAD_BYTES = 0x04034b50;
+            if (data != null && data.Length >= 4)
+            {
+                return BitConverter.ToInt32(data, 0) == ZIP_LEAD_BYTES;
+            }
+            return false;
+        }
+
+
         private readonly byte[] zippedData;
         private readonly string fileName = string.Empty;
         public ZippedTextReader(byte[] zippedData)
         {
+            byte[] header = new byte[4];
+            Array.Copy(zippedData, header, 4);
+            if (!IsCompressedData(header))
+            {
+                throw new ArgumentException("Given argument is not valid compressed data");
+            }
             this.zippedData = zippedData;
         }
         public ZippedTextReader(byte[] zippedData, string fileName)
