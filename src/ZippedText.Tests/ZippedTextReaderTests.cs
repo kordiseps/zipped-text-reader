@@ -49,7 +49,7 @@ namespace ZippedText.Tests
 
         public static IEnumerable<object[]> Get_Params_For_Should_Throw_Exception_On_Create_Instance()
         {
-            yield return new object[] { new byte[] { 80, 75, 3, } };
+            yield return new object[] { new byte[] { 80, 75, 3, 2, 15 } };
             yield return new object[] { new byte[] { 0, 75, 3, 4, 20, 0, } };
         }
 

@@ -1,7 +1,43 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+		<ApplicationIcon>write.ico</ApplicationIcon>
+		<Company>kordiseps</Company>
+		<PackageProjectUrl>https://kordiseps.github.io/zipped-text-reader-and-writer/src/ZippedText.Writer</PackageProjectUrl>
+		<PackageIcon>write.png</PackageIcon>
+		<RepositoryUrl>https://github.com/kordiseps/zipped-text-reader-and-writer</RepositoryUrl>
+		<PackageTags>compressed, text, writer, zipped</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<Authors>kordiseps</Authors>
+		<Description>Simple, low memory consuming zipped text writer for .Net.This library aims to consume less RAM by writing a certain part of the text file without holding the entire file on the memory. So that means you don't need to prepare entire file to compress.</Description>
+		<Copyright>2022 kordiseps apps</Copyright>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
 	</PropertyGroup>
-
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="write.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="write.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="write.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
 </Project>
